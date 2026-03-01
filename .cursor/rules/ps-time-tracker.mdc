@@ -5,32 +5,44 @@ alwaysApply: true
 
 # PS Time Tracker
 
-A time-tracking web app for Amplitude Professional Services.
+A time-tracking web app for Amplitude Professional Services, built by Giuliano Giannini (Senior Solutions Architect).
 
 ## Project Location
 
 `~/Desktop/time-tracker`
 
-## GitHub
+## GitHub & Live Site
 
-https://github.com/GGFirenze/PSTimeTracker
+- Repo: https://github.com/GGFirenze/PSTimeTracker
+- Live: https://ggfirenze.github.io/PSTimeTracker/
 
 ## Tech Stack
 
 - React 18 + TypeScript + Vite
 - LocalStorage for persistence (no backend)
-- Amplitude Browser SDK via CDN script loader (PROD key in `index.html`)
+- Amplitude Browser SDK via CDN script loader (PROD key `851e3783...` in `index.html`)
 - Session Replay enabled (sampleRate: 1)
+- Autocapture: pageViews, attribution, frustrationInteractions (others disabled)
 - CSS (no framework) with CSS variables in `src/styles/index.css`
+- Google Calendar embedded via iframe in `src/components/CalendarWidget.tsx`
 
 ## Architecture
 
 - `src/context/ProjectContext.tsx` — dynamic project list (defaults + custom), persisted in LocalStorage
 - `src/context/TimerContext.tsx` — timer state (start/pause/stop), time entries, persisted in LocalStorage
 - `src/analytics.ts` — centralized Amplitude tracking helpers, uses `window.amplitude` from CDN
-- `src/data/projects.ts` — default project definitions (billable + non-billable)
+- `src/data/projects.ts` — default project definitions (10 billable + 4 non-billable)
+- `src/components/CalendarWidget.tsx` — collapsible Google Calendar iframe
 
-## Amplitude Events Tracked
+## Billable Customers
+
+JPMC, Snyk, Pleo, ManoMano, Wallapop, Cabify, TheFork, Canal+, Doctolib, Fressnapf
+
+## Non-Billable Categories
+
+Internal Meetings, Internal Projects, Self Development, Free PS Hours
+
+## Amplitude Events Tracked (9 custom events)
 
 - Timer Started, Timer Paused, Timer Stopped (project_name, is_billable, duration_seconds)
 - Note Viewed, Note Submitted (project_name, is_billable, note_text)
@@ -40,7 +52,17 @@ https://github.com/GGFirenze/PSTimeTracker
 ## Key Conventions
 
 - Projects have `isDefault: true/false` — default projects cannot be deleted
+- User-added projects show a delete (x) button with type-name-to-confirm safety modal
 - Only one timer runs at a time; starting a new one auto-stops the previous
-- Stopping a timer always shows the Notes modal
+- Stopping a timer always shows the Notes modal for session notes
 - All new Amplitude events should go through helpers in `src/analytics.ts`
+- Color scheme: green = billable, crimson red = non-billable
 - The dev server runs with `npm run dev` on `http://localhost:5173`
+
+## Deployment
+
+Hosted on GitHub Pages. To deploy changes:
+```
+npm run build && npx gh-pages -d dist
+```
+Vite base path is set to `/PSTimeTracker/` in `vite.config.ts`.
