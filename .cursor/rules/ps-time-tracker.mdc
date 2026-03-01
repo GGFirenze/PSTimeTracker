@@ -1,0 +1,46 @@
+---
+description: PS Time Tracker project context and conventions
+alwaysApply: true
+---
+
+# PS Time Tracker
+
+A time-tracking web app for Amplitude Professional Services.
+
+## Project Location
+
+`~/Desktop/time-tracker`
+
+## GitHub
+
+https://github.com/GGFirenze/PSTimeTracker
+
+## Tech Stack
+
+- React 18 + TypeScript + Vite
+- LocalStorage for persistence (no backend)
+- Amplitude Browser SDK via CDN script loader (PROD key in `index.html`)
+- Session Replay enabled (sampleRate: 1)
+- CSS (no framework) with CSS variables in `src/styles/index.css`
+
+## Architecture
+
+- `src/context/ProjectContext.tsx` — dynamic project list (defaults + custom), persisted in LocalStorage
+- `src/context/TimerContext.tsx` — timer state (start/pause/stop), time entries, persisted in LocalStorage
+- `src/analytics.ts` — centralized Amplitude tracking helpers, uses `window.amplitude` from CDN
+- `src/data/projects.ts` — default project definitions (billable + non-billable)
+
+## Amplitude Events Tracked
+
+- Timer Started, Timer Paused, Timer Stopped (project_name, is_billable, duration_seconds)
+- Note Viewed, Note Submitted (project_name, is_billable, note_text)
+- Project Added, Project Deleted (project_name, is_billable)
+- Calendar Opened, Calendar Collapsed
+
+## Key Conventions
+
+- Projects have `isDefault: true/false` — default projects cannot be deleted
+- Only one timer runs at a time; starting a new one auto-stops the previous
+- Stopping a timer always shows the Notes modal
+- All new Amplitude events should go through helpers in `src/analytics.ts`
+- The dev server runs with `npm run dev` on `http://localhost:5173`
