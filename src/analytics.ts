@@ -65,9 +65,10 @@ export function trackProjectAdded(projectName: string, isBillable: boolean) {
   });
 }
 
-export function trackProjectDeleted(projectName: string) {
+export function trackProjectDeleted(projectName: string, isBillable: boolean) {
   track('Project Deleted', {
     project_name: projectName,
+    is_billable: isBillable,
   });
 }
 

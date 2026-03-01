@@ -22,7 +22,7 @@ export function ProjectGrid() {
   const handleConfirmDelete = () => {
     if (!deletingProject) return;
     deleteProject(deletingProject.id);
-    trackProjectDeleted(deletingProject.name);
+    trackProjectDeleted(deletingProject.name, deletingProject.category === 'billable');
     setDeletingProject(null);
   };
 
