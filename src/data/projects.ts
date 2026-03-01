@@ -18,6 +18,7 @@ export const DEFAULT_NON_BILLABLE_PROJECTS: Project[] = [
   { id: 'internal-projects', name: 'Internal Projects', category: 'non-billable', isDefault: true },
   { id: 'self-development', name: 'Self Development', category: 'non-billable', isDefault: true },
   { id: 'free-ps-hours', name: 'Free PS Hours', category: 'non-billable', isDefault: true },
+  { id: 'admin-time', name: 'Admin Time', category: 'non-billable', isDefault: true },
 ];
 
 export const DEFAULT_PROJECTS: Project[] = [
