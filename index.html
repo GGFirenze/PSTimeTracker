@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/PSTimeTracker/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PS Time Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.amplitude.com/script/851e3783004c07f339f793cd2d0eefa2.js"></script>
+    <script>
+      window.amplitude.add(window.sessionReplay.plugin({sampleRate: 1}));
+      window.amplitude.init('851e3783004c07f339f793cd2d0eefa2', {
+        fetchRemoteConfig: true,
+        autocapture: {
+          attribution: true,
+          pageViews: true,
+          sessions: false,
+          formInteractions: false,
+          fileDownloads: false,
+          elementInteractions: false,
+          frustrationInteractions: true,
+        }
+      });
+    </script>
+    <script type="module" crossorigin src="/PSTimeTracker/assets/index-7d2ayrmv.js"></script>
+    <link rel="stylesheet" crossorigin href="/PSTimeTracker/assets/index-CUWpcuCY.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
