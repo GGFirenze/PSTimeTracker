@@ -51,10 +51,18 @@ export function trackNoteViewed(projectName: string, isBillable: boolean) {
   });
 }
 
-export function trackNoteSubmitted(projectName: string, noteText: string) {
+export function trackNoteSubmitted(projectName: string, isBillable: boolean, noteText: string) {
   track('Note Submitted', {
     project_name: projectName,
+    is_billable: isBillable,
     note_text: noteText,
+  });
+}
+
+export function trackNoteSkipped(projectName: string, isBillable: boolean) {
+  track('Note Skipped', {
+    project_name: projectName,
+    is_billable: isBillable,
   });
 }
 

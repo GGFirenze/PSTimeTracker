@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useTimerContext } from '../context/TimerContext';
 import { useProjectContext } from '../context/ProjectContext';
 import { formatTime } from '../hooks/useTimer';
-import { trackNoteViewed, trackNoteSubmitted } from '../analytics';
+import { trackNoteViewed, trackNoteSubmitted, trackNoteSkipped } from '../analytics';
 
 export function NotesModal() {
   const { pendingStop, confirmStop, cancelStop } = useTimerContext();
@@ -29,13 +29,16 @@ export function NotesModal() {
 
   const handleSubmit = () => {
     if (project && note.trim()) {
-      trackNoteSubmitted(project.name, note.trim());
+      trackNoteSubmitted(project.name, project.category === 'billable', note.trim());
     }
     confirmStop(note.trim());
     setNote('');
   };
 
   const handleSkip = () => {
+    if (project) {
+      trackNoteSkipped(project.name, project.category === 'billable');
+    }
     cancelStop();
     setNote('');
   };
