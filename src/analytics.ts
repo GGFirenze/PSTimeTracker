@@ -70,3 +70,11 @@ export function trackProjectDeleted(projectName: string) {
     project_name: projectName,
   });
 }
+
+export function trackCalendarOpened() {
+  track('Calendar Opened', {});
+}
+
+export function trackCalendarCollapsed() {
+  track('Calendar Collapsed', {});
+}

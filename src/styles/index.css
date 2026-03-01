@@ -1050,6 +1050,73 @@ body {
   cursor: not-allowed;
 }
 
+/* ===== Calendar Widget ===== */
+.calendar-widget {
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.calendar-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  background: var(--color-surface);
+  border: none;
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.calendar-toggle:hover {
+  background: var(--color-surface-hover);
+}
+
+.calendar-toggle-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.calendar-arrow {
+  font-size: 0.65rem;
+  color: var(--color-text-muted);
+  transition: transform var(--transition-normal);
+  display: inline-block;
+}
+
+.calendar-arrow--open {
+  transform: rotate(90deg);
+}
+
+.calendar-toggle-hint {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.calendar-iframe-container {
+  background: var(--color-bg);
+  padding: 4px;
+  animation: fadeIn 0.2s ease;
+}
+
+.calendar-iframe {
+  width: 100%;
+  height: 500px;
+  border: none;
+  border-radius: var(--radius-sm);
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
   .app {

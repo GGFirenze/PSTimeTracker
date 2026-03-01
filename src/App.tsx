@@ -4,6 +4,7 @@ import { Header } from './components/Header';
 import { ActiveTimer } from './components/ActiveTimer';
 import { ProjectGrid } from './components/ProjectGrid';
 import { NotesModal } from './components/NotesModal';
+import { CalendarWidget } from './components/CalendarWidget';
 import { TimeLog } from './components/TimeLog';
 
 export default function App() {
@@ -15,6 +16,7 @@ export default function App() {
           <ActiveTimer />
           <main className="main">
             <ProjectGrid />
+            <CalendarWidget />
             <TimeLog />
           </main>
           <NotesModal />
