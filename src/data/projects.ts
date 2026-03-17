@@ -11,6 +11,7 @@ export const DEFAULT_BILLABLE_PROJECTS: Project[] = [
   { id: 'canal-plus', name: 'Canal+', category: 'billable', isDefault: true },
   { id: 'doctolib', name: 'Doctolib', category: 'billable', isDefault: true },
   { id: 'fressnapf', name: 'Fressnapf', category: 'billable', isDefault: true },
+  { id: 'jpm-fintech', name: 'JPM Fintech Implementation', category: 'billable', isDefault: true },
 ];
 
 export const DEFAULT_NON_BILLABLE_PROJECTS: Project[] = [

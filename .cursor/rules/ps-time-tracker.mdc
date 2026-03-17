@@ -31,7 +31,7 @@ A time-tracking web app for Amplitude Professional Services, built by Giuliano G
 - `src/context/ProjectContext.tsx` — dynamic project list (defaults + custom), persisted in LocalStorage
 - `src/context/TimerContext.tsx` — timer state (start/pause/stop), time entries, persisted in LocalStorage
 - `src/analytics.ts` — centralized Amplitude tracking helpers, uses `window.amplitude` from CDN
-- `src/data/projects.ts` — default project definitions (10 billable + 4 non-billable)
+- `src/data/projects.ts` — default project definitions (10 billable + 5 non-billable)
 - `src/components/CalendarWidget.tsx` — collapsible Google Calendar iframe
 
 ## Billable Customers
@@ -40,14 +40,19 @@ JPMC, Snyk, Pleo, ManoMano, Wallapop, Cabify, TheFork, Canal+, Doctolib, Fressna
 
 ## Non-Billable Categories
 
-Internal Meetings, Internal Projects, Self Development, Free PS Hours
+Internal Meetings, Internal Projects, Self Development, Free PS Hours, Admin Time
 
-## Amplitude Events Tracked (9 custom events)
+## Amplitude Events Tracked (10 custom events)
 
 - Timer Started, Timer Paused, Timer Stopped (project_name, is_billable, duration_seconds)
-- Note Viewed, Note Submitted (project_name, is_billable, note_text)
+- Note Viewed, Note Submitted, Note Skipped (project_name, is_billable; Note Submitted also has note_text)
 - Project Added, Project Deleted (project_name, is_billable)
 - Calendar Opened, Calendar Collapsed
+
+## Amplitude Derived Properties
+
+- duration_minutes = duration_seconds / 60
+- duration_hours = duration_seconds / 3600
 
 ## Key Conventions
 
@@ -63,6 +68,7 @@ Internal Meetings, Internal Projects, Self Development, Free PS Hours
 
 Hosted on GitHub Pages. To deploy changes:
 ```
-npm run build && npx gh-pages -d dist
+git add . && git commit -m "message" && git push && npm run build && npx gh-pages -d dist
 ```
 Vite base path is set to `/PSTimeTracker/` in `vite.config.ts`.
+Git commands must be run in a separate terminal tab from `npm run dev`.
