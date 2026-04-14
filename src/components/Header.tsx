@@ -1,7 +1,14 @@
 import { useTimerContext } from '../context/TimerContext';
 import { formatTimeCompact } from '../hooks/useTimer';
+import { trackPopOutClicked } from '../analytics';
 
-export function Header() {
+interface HeaderProps {
+  pipSupported: boolean;
+  pipOpen: boolean;
+  onTogglePiP: () => void;
+}
+
+export function Header({ pipSupported, pipOpen, onTogglePiP }: HeaderProps) {
   const { todayBillableSeconds, todayNonBillableSeconds } = useTimerContext();
   const totalSeconds = todayBillableSeconds + todayNonBillableSeconds;
 
@@ -21,23 +28,40 @@ export function Header() {
         </h1>
         <p className="header-date">{today}</p>
       </div>
-      <div className="header-stats">
-        <div className="stat">
-          <span className="stat-value">{formatTimeCompact(totalSeconds)}</span>
-          <span className="stat-label">Total Today</span>
+      <div className="header-right">
+        <div className="header-stats">
+          <div className="stat">
+            <span className="stat-value">{formatTimeCompact(totalSeconds)}</span>
+            <span className="stat-label">Total Today</span>
+          </div>
+          <div className="stat stat-billable">
+            <span className="stat-value">
+              {formatTimeCompact(todayBillableSeconds)}
+            </span>
+            <span className="stat-label">Billable</span>
+          </div>
+          <div className="stat stat-nonbillable">
+            <span className="stat-value">
+              {formatTimeCompact(todayNonBillableSeconds)}
+            </span>
+            <span className="stat-label">Non-Billable</span>
+          </div>
         </div>
-        <div className="stat stat-billable">
-          <span className="stat-value">
-            {formatTimeCompact(todayBillableSeconds)}
-          </span>
-          <span className="stat-label">Billable</span>
-        </div>
-        <div className="stat stat-nonbillable">
-          <span className="stat-value">
-            {formatTimeCompact(todayNonBillableSeconds)}
-          </span>
-          <span className="stat-label">Non-Billable</span>
-        </div>
+        {pipSupported && (
+          <button
+            className={`pip-toggle-btn ${pipOpen ? 'pip-toggle-btn--active' : ''}`}
+            onClick={() => {
+              if (!pipOpen) trackPopOutClicked();
+              onTogglePiP();
+            }}
+            title={pipOpen ? 'Close floating widget' : 'Open floating widget'}
+          >
+            <span className="pip-toggle-icon">
+              {pipOpen ? '\u2B73' : '\u2197'}
+            </span>
+            {pipOpen ? 'Pop In' : 'Pop Out'}
+          </button>
+        )}
       </div>
     </header>
   );

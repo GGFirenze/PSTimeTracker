@@ -13,6 +13,7 @@ import {
   trackTimerStarted,
   trackTimerPaused,
   trackTimerStopped,
+  type TimerSource,
 } from '../analytics';
 
 interface PendingStop {
@@ -24,10 +25,10 @@ interface TimerContextValue {
   entries: TimeEntry[];
   pendingStop: PendingStop | null;
 
-  startTimer: (projectId: string) => void;
-  pauseTimer: () => void;
-  resumeTimer: () => void;
-  requestStop: () => void;
+  startTimer: (projectId: string, source?: TimerSource) => void;
+  pauseTimer: (source?: TimerSource) => void;
+  resumeTimer: (source?: TimerSource) => void;
+  requestStop: (source?: TimerSource) => void;
   confirmStop: (note: string) => void;
   cancelStop: () => void;
   deleteEntry: (entryId: string) => void;
@@ -59,7 +60,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
   const [pendingStop, setPendingStop] = useState<PendingStop | null>(null);
 
   const startTimer = useCallback(
-    (projectId: string) => {
+    (projectId: string, source: TimerSource = 'main') => {
       const newProject = getProject(projectId);
 
       if (currentEntry) {
@@ -80,7 +81,8 @@ export function TimerProvider({ children }: { children: ReactNode }) {
           trackTimerStopped(
             prevProject.name,
             prevProject.category === 'billable',
-            completed.totalSeconds
+            completed.totalSeconds,
+            source
           );
         }
 
@@ -102,7 +104,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
         setCurrentEntry(newEntry);
 
         if (newProject) {
-          trackTimerStarted(newProject.name, newProject.category === 'billable');
+          trackTimerStarted(newProject.name, newProject.category === 'billable', source);
         }
         return;
       }
@@ -121,13 +123,13 @@ export function TimerProvider({ children }: { children: ReactNode }) {
       setCurrentEntry(newEntry);
 
       if (newProject) {
-        trackTimerStarted(newProject.name, newProject.category === 'billable');
+        trackTimerStarted(newProject.name, newProject.category === 'billable', source);
       }
     },
     [currentEntry, setCurrentEntry, getProject]
   );
 
-  const pauseTimer = useCallback(() => {
+  const pauseTimer = useCallback((source: TimerSource = 'main') => {
     if (!currentEntry || currentEntry.status !== 'active') return;
     const now = Date.now();
     const elapsedMs = now - currentEntry.startTime - currentEntry.totalPausedMs;
@@ -141,7 +143,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
     });
 
     if (project) {
-      trackTimerPaused(project.name, project.category === 'billable', durationSeconds);
+      trackTimerPaused(project.name, project.category === 'billable', durationSeconds, source);
     }
   }, [currentEntry, setCurrentEntry, getProject]);
 
@@ -156,7 +158,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
     });
   }, [currentEntry, setCurrentEntry]);
 
-  const requestStop = useCallback(() => {
+  const requestStop = useCallback((source: TimerSource = 'main') => {
     if (!currentEntry) return;
     const now = Date.now();
     const effectiveEnd = currentEntry.pausedAt ?? now;
@@ -178,7 +180,8 @@ export function TimerProvider({ children }: { children: ReactNode }) {
       trackTimerStopped(
         project.name,
         project.category === 'billable',
-        completed.totalSeconds
+        completed.totalSeconds,
+        source
       );
     }
   }, [currentEntry, setCurrentEntry, getProject]);

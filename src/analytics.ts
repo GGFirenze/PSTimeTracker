@@ -13,35 +13,46 @@ function track(eventType: string, properties: Record<string, unknown>) {
   window.amplitude?.track(eventType, properties);
 }
 
-export function trackTimerStarted(projectName: string, isBillable: boolean) {
+export type TimerSource = 'main' | 'pip_widget';
+
+export function trackTimerStarted(projectName: string, isBillable: boolean, source: TimerSource) {
   track('Timer Started', {
     project_name: projectName,
     is_billable: isBillable,
+    source,
   });
 }
 
 export function trackTimerPaused(
   projectName: string,
   isBillable: boolean,
-  durationSeconds: number
+  durationSeconds: number,
+  source: TimerSource
 ) {
   track('Timer Paused', {
     project_name: projectName,
     is_billable: isBillable,
     duration_seconds: durationSeconds,
+    source,
   });
 }
 
 export function trackTimerStopped(
   projectName: string,
   isBillable: boolean,
-  durationSeconds: number
+  durationSeconds: number,
+  source: TimerSource
 ) {
   track('Timer Stopped', {
     project_name: projectName,
     is_billable: isBillable,
     duration_seconds: durationSeconds,
+    source,
   });
+}
+
+export function trackPopOutClicked() {
+  track('Pop Out Clicked', {});
 }
 
 export function trackNoteViewed(projectName: string, isBillable: boolean) {

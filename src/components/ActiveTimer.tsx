@@ -41,15 +41,15 @@ export function ActiveTimer() {
       </div>
       <div className="active-timer-right">
         {isPaused ? (
-          <button className="timer-btn timer-btn--resume" onClick={resumeTimer}>
+          <button className="timer-btn timer-btn--resume" onClick={() => resumeTimer('main')}>
             <span className="btn-icon">&#9654;</span> Resume
           </button>
         ) : (
-          <button className="timer-btn timer-btn--pause" onClick={pauseTimer}>
+          <button className="timer-btn timer-btn--pause" onClick={() => pauseTimer('main')}>
             <span className="btn-icon">&#10074;&#10074;</span> Pause
           </button>
         )}
-        <button className="timer-btn timer-btn--stop" onClick={requestStop}>
+        <button className="timer-btn timer-btn--stop" onClick={() => requestStop('main')}>
           <span className="btn-icon">&#9632;</span> Stop
         </button>
       </div>
