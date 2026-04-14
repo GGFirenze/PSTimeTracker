@@ -1402,3 +1402,50 @@ body {
   opacity: 0.4;
   cursor: not-allowed;
 }
+
+/* ===== Notes Modal in PiP ===== */
+.pip-widget ~ .modal-overlay {
+  z-index: 300;
+}
+
+.pip-widget ~ .modal-overlay .modal {
+  width: 95%;
+  max-width: none;
+  padding: 20px;
+  border-radius: var(--radius-lg);
+}
+
+.pip-widget ~ .modal-overlay .modal-header {
+  margin-bottom: 16px;
+}
+
+.pip-widget ~ .modal-overlay .modal-title {
+  font-size: 1rem;
+}
+
+.pip-widget ~ .modal-overlay .modal-summary {
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.pip-widget ~ .modal-overlay .modal-project-name {
+  font-size: 0.95rem;
+}
+
+.pip-widget ~ .modal-overlay .modal-duration-value {
+  font-size: 1rem;
+}
+
+.pip-widget ~ .modal-overlay .modal-notes {
+  margin-bottom: 16px;
+}
+
+.pip-widget ~ .modal-overlay .modal-textarea {
+  font-size: 0.85rem;
+  padding: 10px 12px;
+}
+
+.pip-widget ~ .modal-overlay .modal-btn {
+  padding: 8px 16px;
+  font-size: 0.8rem;
+}

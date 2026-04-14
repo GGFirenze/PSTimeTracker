@@ -32,7 +32,13 @@ export default function App() {
           <NotesModal />
         </div>
         {pipWindow &&
-          createPortal(<FloatingWidget />, pipWindow.document.body)}
+          createPortal(
+            <>
+              <FloatingWidget />
+              <NotesModal />
+            </>,
+            pipWindow.document.body
+          )}
       </TimerProvider>
     </ProjectProvider>
   );
