@@ -1172,4 +1172,233 @@ body {
     width: 100%;
     order: 3;
   }
+
+  .header-right {
+    width: 100%;
+  }
+
+  .pip-toggle-btn {
+    align-self: flex-start;
+  }
+}
+
+/* ===== Header Right (stats + PiP button) ===== */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+/* ===== PiP Toggle Button ===== */
+.pip-toggle-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.pip-toggle-btn:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.pip-toggle-btn--active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: white;
+}
+
+.pip-toggle-btn--active:hover {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: white;
+}
+
+.pip-toggle-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ===== Floating PiP Widget ===== */
+.pip-widget {
+  font-family: var(--font-family);
+  color: var(--color-text);
+  background: var(--color-bg);
+  min-height: 100vh;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.pip-timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-billable-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-glow-billable);
+}
+
+.pip-timer-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pip-timer-project {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.pip-timer-badge {
+  font-size: 0.65rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+}
+
+.pip-timer-badge--billable {
+  background: var(--color-billable-bg);
+  color: var(--color-billable);
+  border: 1px solid var(--color-billable-border);
+}
+
+.pip-timer-badge--non-billable {
+  background: var(--color-nonbillable-bg);
+  color: var(--color-nonbillable);
+  border: 1px solid var(--color-nonbillable-border);
+}
+
+.pip-timer-time {
+  font-size: 2.25rem;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  letter-spacing: 2px;
+  color: var(--color-text);
+}
+
+.pip-timer-controls {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  justify-content: center;
+}
+
+.pip-timer-controls .timer-btn {
+  flex: 1;
+  justify-content: center;
+}
+
+.pip-no-timer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 28px 16px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-lg);
+}
+
+.pip-no-timer-text {
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.pip-divider {
+  height: 1px;
+  background: var(--color-border-subtle);
+  margin: 16px 0;
+}
+
+.pip-projects {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.pip-projects-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-muted);
+}
+
+.pip-project-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.pip-group-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-text-secondary);
+  padding: 4px 0;
+}
+
+.pip-project-btn {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-family);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.pip-project-btn:hover:not(:disabled) {
+  background: var(--color-surface-hover);
+  border-color: var(--color-border);
+}
+
+.pip-project-btn--billable:hover:not(:disabled) {
+  border-color: var(--color-billable-border);
+  color: var(--color-billable);
+}
+
+.pip-project-btn--nonbillable:hover:not(:disabled) {
+  border-color: var(--color-nonbillable-border);
+  color: var(--color-nonbillable);
+}
+
+.pip-project-btn--active {
+  border-color: var(--color-accent);
+  background: rgba(74, 108, 247, 0.1);
+  color: var(--color-accent);
+  cursor: default;
+}
+
+.pip-project-btn:disabled:not(.pip-project-btn--active) {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
